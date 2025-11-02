@@ -1,0 +1,17 @@
+{
+    "desc":"My name is Oudom Keo, and I graduated from RUPP in computer science. And every day I work at a bank in Phnom Penh city as a backend developer.",
+    "job":"Backend Developer & Devops",
+    "myBirth":[
+        {
+            "birthday":"02 Feb, 1999",
+            "age": "23",
+            "website":"www.example.com",
+            "degree":"Bachelor", 
+            "phone":"+855 86629792",
+            "email":"dom48489@gmail.com",
+            "city":"Phnom Penh",
+            "freelance":"Available"
+        }
+    ],
+    "placeBirth":"Trabaek village, Svay Chrum commune, Svay Chrum district, Svay Rieng province"
+}
