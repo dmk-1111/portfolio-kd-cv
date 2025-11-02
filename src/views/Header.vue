@@ -21,7 +21,7 @@
     <nav id="navmenu" class="navmenu">
       <ul>
         <li>
-            <a href="/#hero" class="active" id="home"><i class="bi bi-house navicon"></i>Home</a>
+            <a href="/#home" class="active" id="m-home"><i class="bi bi-house navicon"></i>Home</a>
         </li>
         <li>
             <a href="/#about" id="m-about"><i class="bi bi-person navicon"></i>About</a>

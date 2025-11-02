@@ -2,14 +2,14 @@
     <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background ">
+    <section id="home" class="hero section dark-background ">
 
       <img v-if="hero" :src="hero.wallpaper" alt="" class="">
 
       <div class="container" v-if="hero">
         <h2>{{ hero.name === '' ? 'Alex Smit' : hero.name }}</h2>
         <!-- <h1>I'm <span class="ityped" style="color: #149ddd;"></span></h1> -->
-        <h1>I'm <span style="text-decoration:underline;text-decoration-color: #149ddd;">a Backend Developer</span></h1>
+        <h1>I'm <span style="text-decoration:underline;text-decoration-color: #149ddd;"><i>a Backend Developer</i></span></h1>
       </div>
 
     </section><!-- /Hero Section -->
@@ -62,7 +62,7 @@
     </section><!-- /About Section -->
 
      <!-- Skills Section -->
-    <section id="skills" class="skills section light-background">
+    <section id="skills" class="skills section light-background animationSkill">
 
       <!-- Section Title -->
       <div class="container section-title">
@@ -154,7 +154,7 @@
     </section><!-- /Resume Section -->
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section light-background hidden animationPortfolio">
+    <section id="portfolio" class="portfolio section light-background hidden animationHobby">
 
       <!-- Section Title -->
       <div class="container section-title" v-if="hobbies">
@@ -275,7 +275,7 @@
   </main>
 </template>
 <script>
-
+  import('@/assets/js/animation')
   export default {
     data(){
       return {
@@ -289,25 +289,24 @@
     mounted(){
 
       // Create and load the external script dynamically
-      const script = document.createElement('script');
-      script.src = "https://unpkg.com/ityped@0.0.10";
-      script.onload = () => {
-        console.log("--process--");
-        // Wait until the script is loaded, then initialize ityped
-        if (window.ityped) {
-          window.ityped.init(document.querySelector('.ityped'), {
-            strings: [
-              'a Backend Developer',
-              'a Devops Developer',
-              'a Designer'
-            ],
-            loop: true
-          });
-        } else {
-          console.error('ityped not found');
-        }
-      };
-      document.head.appendChild(script);
+      // const script = document.createElement('script');
+      // script.src = "https://unpkg.com/ityped@0.0.10";
+      // script.onload = () => {
+      //   console.log("--process--");
+      //   if (window.ityped) {
+      //     window.ityped.init(document.querySelector('.ityped'), {
+      //       strings: [
+      //         'a Backend Developer',
+      //         'a Devops Developer',
+      //         'a Designer'
+      //       ],
+      //       loop: true
+      //     });
+      //   } else {
+      //     console.error('ityped not found');
+      //   }
+      // };
+      // document.head.appendChild(script);
 
       fetch('https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/hero.json')
         .then((res) => res.json())
@@ -460,4 +459,23 @@
   { animation: none !important; transition: none !important; }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animationAbout,
+.animationSkill,
+.animationResume,
+.animationHobby,
+.animationContact{
+  animation: fade-in linear;
+  animation-timeline: view();
+  animation-range: entry;
+}
 </style>
