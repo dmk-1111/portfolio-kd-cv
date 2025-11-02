@@ -308,22 +308,22 @@
       };
       document.head.appendChild(script);
 
-      fetch('https://raw.githubusercontent.com/K-Oudom/vue-project-02/refs/heads/master/data/hero.json')
+      fetch('https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/hero.json')
         .then((res) => res.json())
         .then((json) => (this.hero = json))
         .catch((err) => console.log(err.message))
 
-      fetch('https://raw.githubusercontent.com/K-Oudom/vue-project-02/refs/heads/master/data/about.json')
+      fetch('https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/about.json')
         .then((res) => res.json())
         .then((json) => (this.aboutData = json))
         .catch((err) => console.log(err.message))
 
-      fetch('https://raw.githubusercontent.com/K-Oudom/vue-project-02/refs/heads/master/data/skills.json')
+      fetch('https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/skills.json')
         .then((res) => res.json())
         .then((json) => (this.skills = json))
         .catch((err) => console.log(err.message))
 
-      fetch('https://raw.githubusercontent.com/K-Oudom/vue-project-02/refs/heads/master/data/hobbies.json')
+      fetch('https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/hobbies.json')
         .then((res) => res.json())
         .then((json) => (this.hobbies = json))
         .catch((err) => console.log(err.message))
