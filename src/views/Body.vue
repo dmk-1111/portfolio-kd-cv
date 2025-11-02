@@ -8,7 +8,8 @@
 
       <div class="container" v-if="hero">
         <h2>{{ hero.name === '' ? 'Alex Smit' : hero.name }}</h2>
-        <h1>I'm <span class="ityped" style="color: #149ddd;"></span></h1>
+        <!-- <h1>I'm <span class="ityped" style="color: #149ddd;"></span></h1> -->
+        <h1>I'm <span style="text-decoration:underline;text-decoration-color: #149ddd;">a Backend Developer</span></h1>
       </div>
 
     </section><!-- /Hero Section -->
@@ -169,7 +170,7 @@
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app" v-for="(hobby,index) in hobbies.hobbyCard" :key="index">
               <div class="portfolio-content h-100">
-                <img :src="hobby.img" class="img-fluid h-100" alt="">
+                <img :src="hobby.img" class="img-fluid" alt="">
                 <div class="portfolio-info">
                   <h4>Hobby</h4>
                   <p>{{ hobby.cardName }}</p>
