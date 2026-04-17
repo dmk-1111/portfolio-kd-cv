@@ -616,6 +616,13 @@ section,
   .hero h2 {
     font-size: 32px;
   }
+  .typing{
+    font-size: 20px !important;
+  }
+  .sub-hero .main-title{
+    position: absolute;
+    bottom: 0;
+  }
 
   .hero p {
     font-size: 20px;

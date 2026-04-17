@@ -2,16 +2,21 @@
     <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background ">
+    <section id="hero" class="hero section dark-background">
 
-      <img v-if="hero" :src="hero.wallpaper" alt="" class="">
-
-      <div class="container" v-if="hero">
-        <h2>{{ hero.name === '' ? 'Alex Smit' : hero.name }}</h2>
-        <h1>I'm <span class="ityped" style="color: #149ddd;"></span></h1>
+      <div v-for="item in heroes" :key="item.id" class="w-100 sub-hero">
+        <img :src="'https://node-backend-twrv.onrender.com/api/image/heroes/' + item.image" alt="" class="">
+        <div class="container main-title">
+          <h2>{{ item.name === '' ? 'Alex Smit' : item.name }}</h2>
+          <h1 class="typing">I'm <span class="text-info">{{ displayText }}</span></h1>
+        </div>
       </div>
 
     </section><!-- /Hero Section -->
+
+    <!-- <section v-else id="hero" class="hero section dark-background">
+      <img src="../assets/img/hero-bg.jpg" alt="">
+    </section> -->
 
     <!-- About Section -->
     <section id="about" class="about section animationAbout">
@@ -273,62 +278,82 @@
 
   </main>
 </template>
-<script>
+<script setup>
+import { ref, onMounted } from "vue";
 
-  export default {
-    data(){
-      return {
-        hero:null,
-        aboutData:null,
-        error:null,
-        skills:null,
-        hobbies:null,
-      }
-    },
-    mounted(){
+const heroes = ref(null);
+const aboutData = ref(null);
+const skills = ref(null);
+const hobbies = ref(null);
+const error = ref(null);
+const jobInput = ref("hello");
 
-      // Create and load the external script dynamically
-      const script = document.createElement('script');
-      script.src = "https://unpkg.com/ityped@0.0.10";
-      script.onload = () => {
-        // Wait until the script is loaded, then initialize ityped
-        if (window.ityped) {
-          window.ityped.init(document.querySelector('.ityped'), {
-            strings: [
-              'a Backend Developer',
-              'a Devops Developer',
-              'a Designer'
-            ],
-            loop: true
-          });
-        } else {
-          console.error('ityped not found');
-        }
-      };
-      document.head.appendChild(script);
+const texts = [
+  "Backend Developer",
+  "Devops Engineer",
+  "Database Administrator",
+];
 
-      fetch('http://localhost:3000/data/hero.json')
-        .then((res) => res.json())
-        .then((json) => (this.hero = json))
-        .catch((err) => console.log(err.message))
+const displayText = ref("");
 
-      fetch('http://localhost:3000/data/about.json')
-        .then((res) => res.json())
-        .then((json) => (this.aboutData = json))
-        .catch((err) => console.log(err.message))
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
 
-      fetch('http://localhost:3000/data/skills.json')
-        .then((res) => res.json())
-        .then((json) => (this.skills = json))
-        .catch((err) => console.log(err.message))
+function typeEffect() {
+  const currentText = texts[textIndex];
 
-      fetch('http://localhost:3000/data/hobbies.json')
-        .then((res) => res.json())
-        .then((json) => (this.hobbies = json))
-        .catch((err) => console.log(err.message))
-    },
+  if (!isDeleting) {
+    // Typing forward
+    displayText.value = currentText.substring(0, charIndex + 1);
+    charIndex++;
+
+    if (charIndex === currentText.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 1500); // pause before delete
+      return;
+    }
+  } else {
+    // Deleting backward
+    displayText.value = currentText.substring(0, charIndex - 1);
+    charIndex--;
+
+    if (charIndex === 0) {
+      isDeleting = false;
+      textIndex = (textIndex + 1) % texts.length;
+    }
   }
 
+  setTimeout(typeEffect, isDeleting ? 50 : 100);
+}
+
+onMounted(() => {
+
+  typeEffect();
+  // Fetch heroes
+  fetch("https://node-backend-twrv.onrender.com/api/heroes")
+    .then((res) => res.json())
+    .then((json) => heroes.value = json)
+    .catch((err) => console.log(err.message));
+
+  // Fetch about
+  fetch("http://localhost:5473/data/about.json")
+    .then((res) => res.json())
+    .then((json) => (aboutData.value = json))
+    .catch((err) => console.log(err.message));
+
+  // Fetch skills
+  fetch("http://localhost:5473/data/skills.json")
+    .then((res) => res.json())
+    .then((json) => (skills.value = json))
+    .catch((err) => console.log(err.message));
+
+  // Fetch hobbies
+  fetch("http://localhost:5473/data/hobbies.json")
+    .then((res) => res.json())
+    .then((json) => (hobbies.value = json))
+    .catch((err) => console.log(err.message));
+});
 </script>
 
 <style scoped>
@@ -456,6 +481,22 @@
   .progress-vue,
   .progress-photoshop 
   { animation: none !important; transition: none !important; }
+}
+
+.typing {
+  font-size: 2rem;
+  font-weight: bold;
+  border-right: 3px solid black;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
 
 </style>
