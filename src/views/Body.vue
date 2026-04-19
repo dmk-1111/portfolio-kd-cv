@@ -326,30 +326,30 @@ onMounted(() => {
 
   typeEffect();
   // Fetch heroes
-  fetch("../../data/hero.json")
+  fetch("https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/hero.json")
     .then((res) => res.json())
     .then((json) => heroes.value = json)
     .catch((err) => console.log(err.message));
 
   // Fetch about
-  fetch("../../data/about.json")
+  fetch("https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/about.json")
     .then((res) => res.json())
     .then((json) => (aboutData.value = json))
     .catch((err) => console.log(err.message));
 
   // Fetch skills
-  fetch("../../data/skills.json")
+  fetch("https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/skills.json")
     .then((res) => res.json())
     .then((json) => (skills.value = json))
     .catch((err) => console.log(err.message));
 
   // Fetch hobbies
-  fetch("../../data/hobbies.json")
+  fetch("https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/hobbies.json")
     .then((res) => res.json())
     .then((json) => (hobbies.value = json))
     .catch((err) => console.log(err.message));
 
-  fetch("../../data/experience.json")
+  fetch("https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/experience.json")
     .then((res) => res.json())
     .then((json) => {
       experiences.value = json;

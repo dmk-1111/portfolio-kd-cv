@@ -53,7 +53,7 @@
       }
     },
     mounted(){
-      fetch("../../data/profile.json")
+      fetch("https://raw.githubusercontent.com/dmk-1111/portfolio-project/refs/heads/master/data/profile.json")
       .then((res) => res.json())
       .then((json) => this.data = json)
       .catch((err) => console.log(err.message));
