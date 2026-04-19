@@ -1,0 +1,41 @@
+{
+    "desc":"My name is Keo Oudom. I was born on February 2, 1999, in Trabaek village, Svay Chrum commune, Svay Chrum district, and Svay Rieng province.",
+    "education":[
+        {
+            "title":"Education",
+            "highSchool":[
+                {
+                    "title":"High School",
+                    "schoolName":"at Hun Sen High School.",
+                    "year":"2014 - 2019"
+                }
+            ],
+            "university":[
+                {
+                    "title":"Bachelor Degree of Computer Science",
+                    "schoolName":"at Royal University of Phnom Penh.",
+                    "year":"2019 - 2023"
+                } 
+            ]
+        }
+    ],
+    "experience":[
+        {
+            "title":"Professional Experience",
+            "backendDeveloper":[
+                {
+                    "title":"Backend Developer",
+                    "companyName":"Shinhan Bank Plc.",
+                    "year":"2023 - Present",
+                    "title1": "Developed an internal and external control system such as:",
+                    "projectName":[
+                        "develop the selling property system for the bank.",
+                        "develop the billing service for pay via QR",
+                        "Rest API development for the bank's mobile application.",
+                        "Maintenance of the SBC website. etc"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -3,11 +3,11 @@
     <i :class="`header-toggle d-xl-none ${menuIcon}`" @click="toggleMenu"></i>
     <!-- bi-x-lg -->
     <div class="profile-img">
-      <img src="../assets/img/profile/me.png" alt="" class="img-fluid rounded-circle">
+      <img :src="data ? data.wallpaper : ''" alt="" class="img-fluid rounded-circle">
     </div>
 
     <a href="/" class="logo d-flex align-items-center justify-content-center">
-         <h1 class="sitename" v-if="data">{{ data.name === '' ? 'Alex Smit' : data.name }}</h1>
+         <h1 class="sitename" v-if="data">{{ data.name === '' ? 'KEO OUDOM' : data.name }}</h1>
     </a>
 
     <div class="social-links text-center">
@@ -53,10 +53,10 @@
       }
     },
     mounted(){
-      fetch('http://localhost:5473/data/hero.json')
-        .then((res) => (res.json()))
-        .then((json) => (this.data = json))
-        .catch((err) => console.log(err.message));
+      fetch("https://portfolio-project-d31c.vercel.app/profile.json")
+      .then((res) => res.json())
+      .then((json) => this.data = json)
+      .catch((err) => console.log(err.message));
     },
 
     methods:{

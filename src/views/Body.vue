@@ -4,19 +4,14 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
-      <div v-for="item in heroes" :key="item.id" class="w-100 sub-hero">
-        <img :src="'https://node-backend-twrv.onrender.com/api/image/heroes/' + item.image" alt="" class="">
+      <div class="w-100 sub-hero">
+        <img :src="(heroes ? heroes.wallpaper : '')" alt="" class="">
         <div class="container main-title">
-          <h2>{{ item.name === '' ? 'Alex Smit' : item.name }}</h2>
+          <h2 v-if="heroes">{{ heroes.name === '' ? 'KEO OUDOM' : heroes.name }}</h2>
           <h1 class="typing">I'm <span class="text-info">{{ displayText }}</span></h1>
         </div>
       </div>
-
-    </section><!-- /Hero Section -->
-
-    <!-- <section v-else id="hero" class="hero section dark-background">
-      <img src="../assets/img/hero-bg.jpg" alt="">
-    </section> -->
+    </section>
 
     <!-- About Section -->
     <section id="about" class="about section animationAbout">
@@ -31,7 +26,7 @@
 
             <div class="row gy-4 justify-content-center">
             <div class="col-lg-4">
-                <img src="../assets/img/aboutMe.jpg" class="img-fluid" alt="" style="filter: contrast(125%);">
+                <img :src="(aboutData.wallpaper ? aboutData.wallpaper : '')" class="img-fluid" alt="" style="filter: contrast(125%);">
             </div>
             <div class="col-lg-8 content">
                 <h2 class="mb-5">{{ aboutData.job }}</h2>              
@@ -39,9 +34,9 @@
                   <div class="col-lg-6">
                       <ul>
                         <li><i class="bi bi-chevron-double-right"></i> <strong>Birthday:</strong> <span>{{ about.birthday }}</span></li>
-                        <li><i class="bi bi-chevron-double-right"></i> <strong>Website:</strong> <span>{{ about.website }}</span></li>
                         <li><i class="bi bi-chevron-double-right"></i> <strong>Phone:</strong> <span>{{ about.phone }}</span></li>
                         <li><i class="bi bi-chevron-double-right"></i> <strong>City:</strong> <span>{{ about.city }}</span></li>
+                        <li><i class="bi bi-chevron-double-right"></i> <strong>Website:</strong> <a class="text-decoration-none" :href="about.website">{{ about.website }}</a></li>
                       </ul>
                   </div>
                   <div class="col-lg-6">
@@ -112,44 +107,45 @@
       <!-- Section Title -->
         <div class="container section-title">
             <h2>Resume</h2>
-            <p>My name is Oudom Keo. I was born on February 2, 1999, in Trabaek village, Svay Chrum commune, Svay Chrum district, and Svay Rieng province.</p>
+            <p v-if="experiences">{{ experiences.desc }}</p>
         </div><!-- End Section Title -->
 
         <div class="container">
 
           <div class="row">
 
-          <div class="col-lg-6">
+            <div class="col-lg-6" v-if="experiences">
+              <div v-for="(edu,index) in experiences.education" :key="index">
+                <h3 class="resume-title" v-if="edu">{{ edu.title }}</h3>
+                <div class="resume-item" v-for="(hs,index) in edu.highSchool" :key="index">
+                  <h4>{{ hs.title }}</h4>
+                  <h5>{{ hs.year }}</h5>
+                  <p><em>{{ hs.schoolName }}</em></p>
+                </div><!-- Edn Resume Item -->
 
-              <h3 class="resume-title">Education</h3>
-              <div class="resume-item">
-                <h4>High School</h4>
-                <h5>2014 - 2019</h5>
-                <p><em>at Hun Sen High School.</em></p>
-              </div><!-- Edn Resume Item -->
-
-              <div class="resume-item">
-                <h4>Bachelor Degree of Computer Science</h4>
-                <h5>2019 - 2023</h5>
-                <p><em>at Royal University of Phnom Penh.</em></p>
-              </div><!-- Edn Resume Item -->
-
-          </div>
-
-          <div class="col-lg-6">
-              <h3 class="resume-title">Professional Experience</h3>
-              <div class="resume-item">
-                <h4>Backend Developer</h4>
-                <h5>2023 - Present</h5>
-                <p><em><i class="bi bi-bank"></i> Shinhan Bank Cambodia</em></p>
-                <p>Developed an internal and external control system such as:</p>
-                <ul>
-                    <li>develop the selling property system</li>
-                    <li>develop the billing service for pay via QR</li>
-                    <li>Maintenance of the SBC website. etc.</li>
-                </ul>
+                <div class="resume-item" v-for="(cg,index) in edu.university" :key="index">
+                  <h4>{{ cg.title }}</h4>
+                  <h5>{{ cg.year }}</h5>
+                  <p><em>{{ cg.schoolName }}</em></p>
+                </div><!-- Edn Resume Item -->
               </div>
-          </div>
+
+            </div>
+
+            <div class="col-lg-6" v-if="experiences">
+                <div v-for="(exp,index) in experiences.experience" :key="index">
+                  <h3 class="resume-title">{{ exp.title }}</h3>
+                  <div class="resume-item" v-for="(ep,index) in exp.backendDeveloper" :key="index">
+                    <h4>{{ ep.title }}</h4>
+                    <h5>{{ ep.year }}</h5>
+                    <p><em><i class="bi bi-bank"></i> {{ ep.companyName }}</em></p>
+                    <h5 class="p-0">{{ ep.title1 }}</h5>
+                    <ul v-for="(name,index) in ep.projectName" :key="index">
+                        <li>{{ name }}</li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
 
         </div>
 
@@ -285,8 +281,7 @@ const heroes = ref(null);
 const aboutData = ref(null);
 const skills = ref(null);
 const hobbies = ref(null);
-const error = ref(null);
-const jobInput = ref("hello");
+const experiences = ref(null);
 
 const texts = [
   "Backend Developer",
@@ -331,27 +326,35 @@ onMounted(() => {
 
   typeEffect();
   // Fetch heroes
-  fetch("https://node-backend-twrv.onrender.com/api/heroes")
+  fetch("https://portfolio-project-d31c.vercel.app/data/hero.json")
     .then((res) => res.json())
     .then((json) => heroes.value = json)
     .catch((err) => console.log(err.message));
 
   // Fetch about
-  fetch("http://localhost:5473/data/about.json")
+  fetch("https://portfolio-project-d31c.vercel.app/data/about.json")
     .then((res) => res.json())
     .then((json) => (aboutData.value = json))
     .catch((err) => console.log(err.message));
 
   // Fetch skills
-  fetch("http://localhost:5473/data/skills.json")
+  fetch("https://portfolio-project-d31c.vercel.app/data/skills.json")
     .then((res) => res.json())
     .then((json) => (skills.value = json))
     .catch((err) => console.log(err.message));
 
   // Fetch hobbies
-  fetch("http://localhost:5473/data/hobbies.json")
+  fetch("https://portfolio-project-d31c.vercel.app/data/hobbies.json")
     .then((res) => res.json())
     .then((json) => (hobbies.value = json))
+    .catch((err) => console.log(err.message));
+
+  fetch("https://portfolio-project-d31c.vercel.app/data/experience.json")
+    .then((res) => res.json())
+    .then((json) => {
+      experiences.value = json;
+      console.log(experiences.value);
+    })
     .catch((err) => console.log(err.message));
 });
 </script>
@@ -398,7 +401,7 @@ onMounted(() => {
   }
   to {
     opacity: 1;
-    width: 95%;
+    width: 90%;
   }
 }
 
@@ -440,7 +443,7 @@ onMounted(() => {
   }
   to {
     opacity: 1;
-    width: 85%;
+    width: 80%;
   }
 }
 

@@ -2,27 +2,27 @@
     "desc":"My hobbies in my free time are playing volleyball, doing exercise, reading books, watching movies, listening to music and doing research on the internet.",
     "hobbyCard":[
         {
-            "img":"/assets/img/hobbies/volleyball.jpg",
+            "img":"src/assets/img/hobbies/volleyball.jpg",
             "cardName":"Volleyball"
         },
         {
-            "img":"/assets/img/hobbies/exercise.jpg",
+            "img":"src/assets/img/hobbies/exercise.jpg",
             "cardName":"Exercise"
         },
         {
-            "img":"/assets/img/hobbies/book.jpg",
+            "img":"src/assets/img/hobbies/book.jpg",
             "cardName":"Book"
         },
         {
-            "img":"/assets/img/hobbies/movie.jpg",
+            "img":"src/assets/img/hobbies/movie.jpg",
             "cardName":"Watching movie"
         },
         {
-            "img":"/assets/img/hobbies/music.jpg",
+            "img":"src/assets/img/hobbies/music.jpg",
             "cardName":"Listen to Music"
         },
         {
-            "img":"/assets/img/hobbies/research.jpg",
+            "img":"src/assets/img/hobbies/research.jpg",
             "cardName":"Research"
         }
     ]
