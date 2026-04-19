@@ -326,30 +326,30 @@ onMounted(() => {
 
   typeEffect();
   // Fetch heroes
-  fetch("https://portfolio-project-d31c.vercel.app/data/hero.json")
+  fetch("../../data/hero.json")
     .then((res) => res.json())
     .then((json) => heroes.value = json)
     .catch((err) => console.log(err.message));
 
   // Fetch about
-  fetch("https://portfolio-project-d31c.vercel.app/data/about.json")
+  fetch("../../data/about.json")
     .then((res) => res.json())
     .then((json) => (aboutData.value = json))
     .catch((err) => console.log(err.message));
 
   // Fetch skills
-  fetch("https://portfolio-project-d31c.vercel.app/data/skills.json")
+  fetch("../../data/skills.json")
     .then((res) => res.json())
     .then((json) => (skills.value = json))
     .catch((err) => console.log(err.message));
 
   // Fetch hobbies
-  fetch("https://portfolio-project-d31c.vercel.app/data/hobbies.json")
+  fetch("../../data/hobbies.json")
     .then((res) => res.json())
     .then((json) => (hobbies.value = json))
     .catch((err) => console.log(err.message));
 
-  fetch("https://portfolio-project-d31c.vercel.app/data/experience.json")
+  fetch("../../data/experience.json")
     .then((res) => res.json())
     .then((json) => {
       experiences.value = json;

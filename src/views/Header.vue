@@ -53,7 +53,7 @@
       }
     },
     mounted(){
-      fetch("https://portfolio-project-d31c.vercel.app/profile.json")
+      fetch("../../data/profile.json")
       .then((res) => res.json())
       .then((json) => this.data = json)
       .catch((err) => console.log(err.message));
